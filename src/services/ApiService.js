@@ -24,3 +24,9 @@ export function fetchMovieById(movieId) {
     );
 }
 
+export function fetchMoviesByKeyword(keyword) {
+    return fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&language=en-US&page=1`
+    )
+}
+
