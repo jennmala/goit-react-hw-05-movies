@@ -29,7 +29,7 @@ export const HomePage = () => {
             <ul>
                 {movies.map((movie) => (
                         <li key={movie.id}>
-                        <Link to={`movies/${movie.id}`}>{movie.original_title ? movie.original_title : movie.original_name}</Link>
+                          <Link to={`/movies/${movie.id}`}>{movie.original_title ? movie.original_title : movie.original_name}</Link>
                         </li>
                     )
                 ) }
