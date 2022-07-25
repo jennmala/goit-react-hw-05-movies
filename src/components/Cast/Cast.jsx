@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { fetchCast } from 'services/ApiService';
 
-export const Cast = () => {
+export default function Cast() {
     const [movieId] = useOutletContext();
     const [actors, setActors] = useState(null);
 

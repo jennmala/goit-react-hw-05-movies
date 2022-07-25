@@ -3,7 +3,9 @@ import { fetchMoviesByKeyword } from 'services/ApiService';
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 
-export const MoviesPage = () => {
+// useLocation(), useHistory() history.push('/....')
+
+export default function MoviesPage() {
     const [search, setSearch] = useSearchParams();
     const [keyword, setKeyword] = useState('');
     const [movies, setMovies] = useState(null);
@@ -48,4 +50,4 @@ export const MoviesPage = () => {
             }
         </>
     )
-}
+}  

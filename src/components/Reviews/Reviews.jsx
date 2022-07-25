@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { fetchReview } from 'services/ApiService';
 
-export const Reviews = () => {
+export default function Reviews() {
     const [movieId] = useOutletContext();
     const [reviews, setReviews] = useState(null);
 

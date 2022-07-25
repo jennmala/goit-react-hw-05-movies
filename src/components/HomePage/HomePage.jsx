@@ -3,7 +3,7 @@ import { fetchTrending } from 'services/ApiService'
 import { Link } from "react-router-dom";
 
 
-export const HomePage = () => {
+export default function HomePage() {
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -37,3 +37,5 @@ export const HomePage = () => {
         </>
     )
 }
+
+// export default HomePage;

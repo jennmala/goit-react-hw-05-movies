@@ -1,9 +1,9 @@
 import { Outlet, useParams, useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 
 import { fetchMovieById } from 'services/ApiService'
 
-export const MovieDetailsPage = () => {
+export default function MovieDetailsPage() {
     let navigate = useNavigate();
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
@@ -44,7 +44,9 @@ export const MovieDetailsPage = () => {
                 <li><Link to='reviews'>Reviews</Link></li>
             </ul>
 
-            <Outlet context={[movieId]}/>
+            <Suspense fallback={<p>Loading...</p>}>
+                <Outlet context={[movieId]}/>
+            </Suspense>
         </> 
         }    
         </>   
