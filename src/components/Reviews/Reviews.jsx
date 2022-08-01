@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { fetchReview } from 'services/ApiService';
+import { ListWrap, ListItem, Author } from './Reviews.styled';
 
 export default function Reviews() {
     const [movieId] = useOutletContext();
@@ -19,16 +20,16 @@ export default function Reviews() {
         <>
         { reviews 
         ?
-            <ul>
+            <ListWrap>
                 { reviews.map((review) => (
-                    <li key={review.id}>
-                        <p>Author: {review.author}</p>
+                    <ListItem key={review.id}>
+                        <Author>Author: <span>{review.author}</span></Author>
                         <p>{review.content}</p>
-                    </li>
+                    </ListItem>
                 ))
 
                 }
-            </ul>
+            </ListWrap>
         :
         <p>There are no reviews</p>
         }

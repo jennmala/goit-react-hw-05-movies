@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { fetchCast } from 'services/ApiService';
+import { ListWrap, ListItem, Poster, Descr } from './Cast.styled';
+import placeholder from 'placeholder.jpg';
 
 export default function Cast() {
     const [movieId] = useOutletContext();
@@ -19,15 +21,17 @@ export default function Cast() {
         <>      
         { actors 
         ? 
-            <ul> 
+            <ListWrap> 
                 { actors.map((actor) => (                
-                    <li key={actor.id}>
-                        { actor.profile_path && <img src={`https://image.tmdb.org/t/p/original${actor.profile_path}`} width="20" alt="" /> }
-                        <p>{actor.original_name}</p>
-                        <p>Character: {actor.character}</p>        
-                    </li> 
+                    <ListItem key={actor.id}>
+                        <Poster src={ actor.profile_path ? `https://image.tmdb.org/t/p/original${actor.profile_path}` : placeholder } alt="" />
+                        <Descr>
+                            <p>{actor.original_name}</p>
+                            <p>Character: {actor.character}</p>  
+                        </Descr>
+                    </ListItem> 
                 ))}
-            </ul>
+            </ListWrap>
         :
         <p>There are no actors</p>
         }

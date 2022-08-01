@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchMoviesByKeyword } from 'services/ApiService';
-import { Link, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import slugify from "slugify";
+import { ListWrap, ListItem, LinkItem } from '../HomePage/HomePage.styled';
+import { FormWrap, Input, Button } from './MoviesPage.styled';
 
 // useLocation(), useHistory() history.push('/....')
+
+const makeSlug = (string) => slugify(string, { lower: true });
 
 export default function MoviesPage() {
     const [search, setSearch] = useSearchParams();
@@ -33,20 +37,22 @@ export default function MoviesPage() {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
-                <input onChange={onInputChange} type="text" value={keyword} />
-                <input type="submit" value="Search" />
-            </form>
+            <FormWrap onSubmit={onSubmit}>
+                <Input onChange={onInputChange} type="text" value={keyword} />
+                <Button type="submit" value="Search" />
+            </FormWrap>
 
             { movies && 
-                <ul>
+                <ListWrap>
                     {movies.map((movie) => (
-                            <li key={movie.id}>
-                            <Link to={`${movie.id}`}>{movie.original_title ? movie.original_title : movie.original_name}</Link>
-                            </li>
+                            <ListItem key={movie.id}>
+                                <LinkItem to={`${makeSlug(`${movie.original_title} ${movie.id}`)}`}>
+                                    {movie.original_title ? movie.original_title : movie.original_name}
+                                </LinkItem>
+                            </ListItem>
                         )
                     ) }
-                </ul>
+                </ListWrap>
             }
         </>
     )

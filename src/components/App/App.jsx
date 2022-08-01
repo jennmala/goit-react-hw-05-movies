@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from "react-router-dom";
-
 import { Navigation } from 'components/Navigation/Navigation';
+import { Container } from './App.styled';
 // import { HomePage } from 'components/HomePage/HomePage';
 // import { MoviesPage } from 'components/MoviesPage/MoviesPage';
 // import { MovieDetailsPage } from 'components/MovieDetailsPage/MovieDetailsPage';
@@ -22,32 +22,31 @@ const Cast = lazy(() => import('components/Cast/Cast.jsx' /* webpackChunkName: "
 
 export const App = () => {
     return (
-        <>
+        <Container>
             < Navigation />
 
             <Suspense fallback={<p>Loading...</p>}>
             <Routes>
                 <Route
                     path="/"
-                    element={<HomePage />} />
-                
+                    element={<HomePage />} />                
+             
                 <Route
                     path="movies"
-                    element={<MoviesPage />}>
-                </Route>
+                    element={<MoviesPage />} />                
                 
                 <Route
-                    path="movies/:movieId"
-                    element={<MovieDetailsPage />} >
+                    path="movies/:slug"
+                    element={<MovieDetailsPage />} >                    
                     <Route path="cast" element={<Cast />} />
                     <Route path="reviews" element={<Reviews />} />
                 </Route>
 
-                <Route path='*' element={<h1>not found</h1>} />
+                <Route path='*' element={<h1>Page not found</h1>} />
                         
             </Routes>
             </Suspense>
-        </>        
+        </Container>        
     )
 }
 

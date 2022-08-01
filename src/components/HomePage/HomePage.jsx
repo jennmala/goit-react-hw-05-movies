@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-import { fetchTrending } from 'services/ApiService'
-import { Link } from "react-router-dom";
+import { fetchTrending } from 'services/ApiService';
+import slugify from "slugify";
+import { Title, ListWrap, ListItem, LinkItem } from './HomePage.styled';
+
+const makeSlug = (string) => slugify(string, { lower: true });
 
 
 export default function HomePage() {
@@ -24,16 +27,18 @@ export default function HomePage() {
     
     return (
         <>
-            <h1>Trending today</h1>
+            <Title>Trending today</Title>
 
-            <ul>
+            <ListWrap>
                 {movies.map((movie) => (
-                        <li key={movie.id}>
-                          <Link to={`/movies/${movie.id}`}>{movie.original_title ? movie.original_title : movie.original_name}</Link>
-                        </li>
+                        <ListItem key={movie.id}>
+                          <LinkItem to={`/movies/${makeSlug(`${movie.original_title ? movie.original_title : movie.original_name} ${movie.id}`)}`}>
+                            {movie.original_title ? movie.original_title : movie.original_name}
+                          </LinkItem>
+                        </ListItem>
                     )
                 ) }
-            </ul>
+            </ListWrap>
         </>
     )
 }
